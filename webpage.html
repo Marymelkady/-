@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مُتنبئ أنواع الحيوانات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            direction: rtl; /* Right-to-left direction for Arabic */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>مُتنبئ أنواع الحيوانات</h1>
+    <label for="size">الحجم (سم):</label>
+    <input type="number" id="size" placeholder="أدخل حجم الحيوان">
+
+    <label for="temperature">درجة حرارة الجسم (°م):</label>
+    <input type="number" id="temperature" placeholder="أدخل درجة حرارة الجسم">
+
+    <label for="speed">السرعة (م/ث):</label>
+    <input type="number" id="speed" placeholder="أدخل سرعة الحيوان">
+
+    <button onclick="predictSpecies()">تنبؤ النوع</button>
+
+    <div class="result" id="result" style="display:none;">
+        <h2>نتيجة التنبؤ</h2>
+        <p id="species"></p>
+        <p id="advice"></p>
+    </div>
+</div>
+
+<script>
+    function predictSpecies() {
+        const size = parseFloat(document.getElementById('size').value);
+        const temperature = parseFloat(document.getElementById('temperature').value);
+        const speed = parseFloat(document.getElementById('speed').value);
+        
+        // Simple prediction logic based on size, temperature, and speed
+        let species = "نوع غير معروف";
+        let advice = "";
+
+        if (size >= 90 && size <= 120 && temperature >= 36 && temperature <= 39 && speed >= 1 && speed <= 5) {
+            species = "المها العربي";
+            advice = "استمتع بالمشاهدة من مسافة. ابقَ بعيدًا؛ فهي حيوانات برية.";
+        } else if (size >= 50 && size <= 120 && temperature >= 20 && temperature <= 30 && speed >= 0.5 && speed <= 2) {
+            species = "الأفعى الرملية";
+            advice = "كن حذرًا! تجنب الاقتراب. إذا تعرضت للدغ، اطلب المساعدة الطبية على الفور.";
+        } else if (size >= 20 && size <= 30 && temperature >= 35 && temperature <= 38 && speed >= 0.5 && speed <= 1) {
+            species = "القنفذ الصحراوي";
+            advice = "لا خطر فوري. عمومًا خجول؛ تجنب إزعاجه.";
+        } else if (size >= 80 && size <= 200 && temperature >= 20 && temperature <= 30 && speed >= 0.5 && speed <= 3) {
+            species = "الكوبرا العربية";
+            advice = "خطير للغاية! ابقَ بعيدًا. اتصل بالسلطات المحلية إذا تم رصدها.";
+        } else {
+            species = "نوع غير معروف";
+            advice = "لا توجد نصائح محددة متاحة.";
+        }
+
+        // Display the result
+        document.getElementById('species').innerText = "النوع المتوقع: " + species;
+        document.getElementById('advice').innerText = advice;
+        document.getElementById('result').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
